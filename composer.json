@@ -12,5 +12,14 @@
             "homepage": "https://garbott.co.uk",
             "role": "Developer"
         }
-    ]
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "CapitlGain": "src/"
+        }
+    }
 }
