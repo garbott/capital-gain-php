@@ -20,6 +20,11 @@ class CapitalGain
     protected $data = [];
 
     /**
+     * @var bool
+     */
+    protected $validCalculatorData = false;
+
+    /**
      * CapitalGain constructor.
      *
      * @param  array  $data
@@ -34,7 +39,10 @@ class CapitalGain
      */
     public function calculate()
     {
-        return 'Hello World, Composer!';
+        if(!$this->isValidCalculatorData()) {
+            throw new \Exception("Calculator data invalid");
+        }
+
     }
 
     /**
@@ -51,11 +59,69 @@ class CapitalGain
      */
     public function setData(array $data): void
     {
-        foreach($data as $datum) {
-            if(!$datum instanceof Transaction) {
-                throw new \Exception("data item not instance of CaptaiGain::Models::Transaction");
+        $this->setValidCalculatorData(false);
+        if(!empty($data)) {
+            $this->validateData($data);
+        }
+        // @TODO work out if empty arrays ([]) are valid? Maybe, if the calculator is booted, called, and then appended too lator on.
+        $this->data = $data;
+        $this->setValidCalculatorData(true);
+    }
+
+    /**
+     * @param  Transaction  $data
+     * @throws \Exception
+     */
+    public function addData(Transaction $data): void
+    {
+        $this->data[] = $data;
+        $this->validateData($this->getData());
+        $this->setValidCalculatorData(true);
+    }
+
+    /**
+     * Clear data array
+     */
+    public function resetData(): void
+    {
+        $this->data = [];
+    }
+
+    /**
+     * Alias function
+     * Clear data array
+     */
+    public function clearData()
+    {
+        return $this->resetData();
+    }
+
+    /**
+     * @param  array  $data
+     * @throws \Exception
+     */
+    protected function validateData(array $data)
+    {
+        foreach ($data as $datum) {
+            if (!$datum instanceof Transaction) {
+                throw new \Exception("data item not instance of CapitalGain::Models::Transaction");
             }
         }
-        $this->data = $data;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValidCalculatorData(): bool
+    {
+        return $this->validCalculatorData;
+    }
+
+    /**
+     * @param  bool  $validCalculatorData
+     */
+    public function setValidCalculatorData(bool $validCalculatorData): void
+    {
+        $this->validCalculatorData = $validCalculatorData;
     }
 }
