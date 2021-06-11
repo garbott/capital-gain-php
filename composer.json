@@ -4,7 +4,7 @@
     "description": "Library to calculate capital gains",
     "keywords": ["tax","calculator","captail gains","capgain"],
     "homepage": "https://garbott.co.uk",
-    "license": "GPU3",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Joseph Garbett",
