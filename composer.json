@@ -1,5 +1,5 @@
 {
-    "name": "garbott/captail-gain-php",
+    "name": "garbott/capital-gain-php",
     "type": "library",
     "description": "Library to calculate capital gains",
     "keywords": ["tax","calculator","captail gains","capgain"],
